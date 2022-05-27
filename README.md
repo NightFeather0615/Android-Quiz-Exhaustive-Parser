@@ -18,4 +18,4 @@ Images:
   
 ## FAQ
 Q: Why make this?  
-A: Check https://rsvp.withgoogle.com/events/asj-2022/home
+A: Bc im lazy to finish the quiz, check https://rsvp.withgoogle.com/events/asj-2022/home
