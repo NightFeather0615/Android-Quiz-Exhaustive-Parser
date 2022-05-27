@@ -1,6 +1,6 @@
 # Android-Quiz-Exhaustive-Parser
-Python version: 3.9.7  
-Dependence: requests, copy  
+Python version: `3.9.7`  
+Dependence: `requests`, `copy`  
   
 Run: `python main.py`
   
