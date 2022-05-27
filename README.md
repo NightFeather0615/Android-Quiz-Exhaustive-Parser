@@ -9,4 +9,4 @@ You need go course page after run the script to earn badge.
 
 ## FAQ
 Q: Why make this?  
-A: Check there: https://rsvp.withgoogle.com/events/asj-2022/home
+A: Check https://rsvp.withgoogle.com/events/asj-2022/home
