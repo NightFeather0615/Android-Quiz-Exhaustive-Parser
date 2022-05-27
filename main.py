@@ -139,22 +139,4 @@ for questionIndex, question in enumerate(tempPayload['quiz']['questions']):
 response = requests.post(url, data=str(payload), headers=headers).json()
 
 print(f"\nExhaustive parse finished\nScore: {response['quiz'].get('grade', '0')}\nPassed: {response['quiz'].get('passed', 'False')}")
-
-# if not response['quiz'].get('passed') is None:
-#   print("Quiz passed, showing answer...")
-
-#   for questionIndex, question in enumerate(tempPayload['quiz']['questions']):
-#     if not question.get('multipleChoiceSingleAnswer') is None:
-#       print(f"Question {questionIndex}: {question['multipleChoiceSingleAnswer']['answer']['index']}")
-
-#     if not question.get('multipleChoiceMultipleAnswer') is None:
-#       print(f"Question {questionIndex}: ", end="")
-#       for answer in question['multipleChoiceMultipleAnswer']['answers']:
-#         print(answer['index'], end=", ")
-#       print("\b")
-
-#     if not question.get('matchItems') is None:
-#       print(f"Question {questionIndex}: Unsupport question type, pass")
-
-#     if not question.get('fillInTheBlankSingleAnswer') is None:
-#       print(f"Question {questionIndex}: Unsupport question type, pass")
+print(f"Check the website down below to earn the badge\nhttps://developer.android.com/courses/pathways/{payload['quizPath'].split('/')[-1]}")
