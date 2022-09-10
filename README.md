@@ -1,4 +1,7 @@
-# Android-Quiz-Exhaustive-Parser
+# Android-Quiz-Exhaustive-Parser [DEAD]
+
+!! ~ This method was patched, don't try. ~ !!
+
 Python version: `3.9.7`  
 Dependence: `requests`, `copy`  
   
