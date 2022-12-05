@@ -2,8 +2,8 @@
 
 I fixed it LOL, but you little bit more work to use it, enjoy! 
 
-Python version: `3.9.7`  
-Dependence: `requests`, `copy`  
+Python version: `>=3.9.7`  
+Dependence: `requests`, `copy`, `time`
   
 Run: `python main.py`
   
