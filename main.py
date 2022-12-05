@@ -1,5 +1,6 @@
 import requests
 import copy
+import time
 
 questionTypes = [
   {
@@ -51,15 +52,15 @@ multipleChoiceMultipleAnswerPlaceholder = [
   {"index": 14},
 ]
 
-payload = {
-  "locale": "zh_tw",
-  "quiz":{"questions":[]},
-  "quizPath": input("Quiz path: ")
-}
 headers = {
   "Authorization": input("OAuth Token: "),
   "Content-Type": "application/json",
   "Referer": "https://developer.android.com/"
+}
+payload = {
+  "locale": "zh_tw",
+  "quiz":{"questions":[]},
+  "quizPath": input("Quiz path: ")
 }
 url = f"https://content-developerprofiles-pa.googleapis.com/v1/quizzes/{payload['quizPath'].replace('/', '%2F')}/grade?key=AIzaSyAP-jjEJBzmIyKR4F-3XITp8yM9T1gEEI8&alt=json"
 
@@ -68,28 +69,20 @@ if response.status_code in [401, 403, 404]:
   print("Unauthorization, invalid authentication credentials or expected OAuth 2 access token")
   exit()
 
-print("Parsing quiz", end="")
+print("""
+0: multipleChoiceSingleAnswer
+1: multipleChoiceMultipleAnswer
+2: matchItems
+3: fillInTheBlankSingleAnswer
+""")
+quizTypeData = [int(i) for i in input("Please enter quiz type for each questions (e.g. 12331023): ")]
 
-index = 0
-while True:
-  for quizType in questionTypes:
-    print(".", end="")
-    quiz = copy.deepcopy(quizType)
-    quiz["index"] = index
-
-    tempPayload = copy.deepcopy(payload)
-    tempPayload["quiz"]["questions"].append(quiz)
-
-    response = requests.post(url, data=str(tempPayload), headers=headers)
-
-    if response.status_code == 200:
-      payload = copy.deepcopy(tempPayload)
-      index += 1
-      break
-
-  if response.status_code == 502:
-    print()
-    break
+for index, quizTypeIndex in enumerate(quizTypeData):
+  quiz = copy.deepcopy(questionTypes[quizTypeIndex])
+  quiz["index"] = index
+  tempPayload = copy.deepcopy(payload)
+  tempPayload["quiz"]["questions"].append(quiz)
+  payload = copy.deepcopy(tempPayload)
 
 print("Exhaustive parsing answers", end="")
 
@@ -108,7 +101,7 @@ for questionIndex, question in enumerate(tempPayload['quiz']['questions']):
 
       response = requests.post(url, data=str(tempPayload), headers=headers).json()
 
-      if not response['quiz']['questions'][questionIndex]['multipleChoiceSingleAnswer']['answer'].get('correct') is None:
+      if response['quiz']['questions'][questionIndex].get('correct') is True:
         payload = copy.deepcopy(tempPayload)
         break
 
@@ -123,7 +116,7 @@ for questionIndex, question in enumerate(tempPayload['quiz']['questions']):
 
     tempAnswer = []
     for index, value in enumerate(response['quiz']['questions'][questionIndex]['multipleChoiceMultipleAnswer']['answers']):
-      if not value.get('correct') is None:
+      if value.get('correct') is True:
         print(".", end="")
         tempAnswer.append({"index": index})
     
