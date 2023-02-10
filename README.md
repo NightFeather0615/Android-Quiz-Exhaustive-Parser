@@ -1,6 +1,6 @@
 # Android-Quiz-Exhaustive-Parser
 
-It's working again, but you little bit more work to use it, enjoy! 
+It's works again, but you little bit more work to use it, enjoy! 
 
 Python version: `>=3.9.7`  
 Dependence: `requests`, `copy`, `time`
